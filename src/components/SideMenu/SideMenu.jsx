@@ -5,6 +5,7 @@ import Profile from "../../assets/Profile.png";
 
 const SideMenu = () => {
   return (
+    // sidebar for large screen device
     <Box
       container
       sx={{
@@ -22,10 +23,12 @@ const SideMenu = () => {
           src={Logo}
           alt="App Logo"
           style={{
-            width: "134px",
-            height: "40px",
+            width: "150px",
+            height: "120px",
+            marginTop: "-12px",
             marginRight: "10px",
             marginLeft: "10px",
+            fontFamily: "Inter",
           }}
         />
       </Box>
@@ -38,7 +41,8 @@ const SideMenu = () => {
             width: "48px",
             height: "48px",
             marginRight: "10px",
-            marginLeft: "32px",
+            marginLeft: "10px",
+            fontFamily: "Inter",
           }}
         />
       </Box>

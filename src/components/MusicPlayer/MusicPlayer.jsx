@@ -26,26 +26,28 @@ const MusicPlayer = ({
   handleColor,
   backgroundColor,
 }) => {
-  const isSmallScreen = useMediaQuery("(max-width:960px)");
+  const isSmallScreen = useMediaQuery("(max-width: 960px)");
+  // states
   const [opacity, setOpacity] = useState(1);
   const audioRef = useRef(null);
   const [audioMuted, setAudioMuted] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [src, setSrc] = useState(
-    `https://cms.samespace.com/assets/${imageUrl}`
-  );
+  const img = `https://cms.samespace.com/assets/${imageUrl}`;
+  const [src, setSrc] = useState(img);
 
+  // setting image & its opacity at player
   useEffect(() => {
     setOpacity(0);
     const timeout = setTimeout(() => {
-      setSrc(`https://cms.samespace.com/assets/${imageUrl}`);
+      setSrc(img);
       setOpacity(1);
     }, 500);
     return () => clearTimeout(timeout);
   }, [imageUrl]);
 
+  //audio data and timeupdate
   useEffect(() => {
     const audio = audioRef.current;
     audio.src = musicUrl;
@@ -73,6 +75,8 @@ const MusicPlayer = ({
       audio.removeEventListener("timeupdate", setAudioTime);
     };
   }, [musicUrl]);
+
+  // functions to handle music(play,pause,next,prev,toggle audio)
 
   const handlePlayPause = () => {
     const audio = audioRef.current;
@@ -115,38 +119,55 @@ const MusicPlayer = ({
     }
   };
   return (
+    // music player card
     <Card
       sx={{
         display: "flex",
         flexDirection: "column",
-        transition: "background-color 1s ease",
         alignItems: isSmallScreen ? "center" : "flex-start",
-        height: isSmallScreen ? "auto" : "100vh",
+        maxWidth: isSmallScreen ? "100%" : "80%",
+        height: isSmallScreen ? "100vh" : "98vh",
+        margin: isSmallScreen ? "auto" : "0",
+        marginTop: "-12px",
+        marginLeft: isSmallScreen ? "-7px" : "0",
+        transition: "background-color 1s ease",
         backgroundColor,
-        margin: isSmallScreen ? "100%" : "none",
-        maxWidth: isSmallScreen ? "100%" : "none",
+        fontFamily: "Inter",
       }}
     >
+      {/* top section of music play (name&artist) */}
       <CardContent>
-        <Typography variant="h4" component="div" sx={{ mb: 1, color: "white" }}>
+        <Typography
+          variant="h4"
+          component="div"
+          sx={{ mb: 1, color: "white", fontFamily: "Inter" }}
+        >
           {track?.name}
         </Typography>
         <Typography
           variant="subtitle1"
           component="div"
-          sx={{ marginLeft: "5px", fontSize: "0.8rem", color: "gray" }}
+          sx={{
+            color: "gray",
+            marginLeft: "5px",
+            fontSize: "0.8rem",
+            fontFamily: "Inter",
+          }}
         >
           {track?.artist}
         </Typography>
       </CardContent>
+
+      {/* middle section i.e song cover image */}
       <Box
         sx={{
+          width: isSmallScreen ? "80%" : "400px",
+          height: isSmallScreen ? "auto" : "440px",
           padding: "-15px",
-          width: isSmallScreen ? "80%" : "450px",
-          height: isSmallScreen ? "auto" : "450px",
           margin: "20px",
           borderRadius: "10px",
           overflow: "hidden",
+          fontFamily: "Inter",
         }}
       >
         <CardMedia
@@ -157,57 +178,72 @@ const MusicPlayer = ({
             objectFit: "cover",
             transition: "opacity 1s ease",
             opacity: opacity,
+            fontFamily: "Inter",
           }}
           src={src}
           alt="song cover"
         />
       </Box>
+
+      {/* music controls play,pause,next,prev,togglesound */}
+
+      {/* time slider */}
       <Slider
         value={currentTime}
         max={duration}
         onChange={handleSliderChange}
         aria-labelledby="Continous-Slider"
-        sx={{ width: "80%", mt: 4, marginLeft: "20px" }}
+        sx={{ width: "80%", mt: 4, marginLeft: "20px", fontFamily: "Inter" }}
       />
-      {/* music control section */}
+
+      {/* music control section all buttons*/}
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
-          px: 2,
           width: "100%",
           marginBottom: "45px",
+          alignItems: "center",
+          px: 2,
+          fontFamily: "Inter",
         }}
       >
         <Box item flex="1">
           <IconButton
-            sx={{ ml: 2, display: "inline-block", transform: "rotate(90deg)" }}
+            sx={{
+              ml: 2,
+              display: "inline-block",
+              transform: "rotate(90deg)",
+              fontFamily: "Inter",
+            }}
           >
-            <MoreVertIcon sx={{ color: "white" }} />
+            <MoreVertIcon sx={{ color: "white", fontFamily: "Inter" }} />
           </IconButton>
         </Box>
         <Box item flex="2">
-          <IconButton onClick={handlePrevious} sx={{ mr: 2 }}>
-            <SkipPreviousIcon sx={{ color: "white" }} />
+          <IconButton
+            onClick={handlePrevious}
+            sx={{ mr: 2, fontFamily: "Inter" }}
+          >
+            <SkipPreviousIcon sx={{ color: "white", fontFamily: "Inter" }} />
           </IconButton>
           <IconButton onClick={handlePlayPause}>
             {isPlaying ? (
-              <PauseIcon sx={{ color: "white" }} />
+              <PauseIcon sx={{ color: "white", fontFamily: "Inter" }} />
             ) : (
-              <PlayArrowIcon sx={{ color: "white" }} />
+              <PlayArrowIcon sx={{ color: "white", fontFamily: "Inter" }} />
             )}
           </IconButton>
-          <IconButton onClick={handleNext} sx={{ ml: 2 }}>
-            <SkipNextIcon sx={{ color: "white" }} />
+          <IconButton onClick={handleNext} sx={{ ml: 2, fontFamily: "Inter" }}>
+            <SkipNextIcon sx={{ color: "white", fontFamily: "Inter" }} />
           </IconButton>
         </Box>
         <Box item flex="1">
-          <IconButton onClick={toggleMute} sx={{ ml: 2 }}>
+          <IconButton onClick={toggleMute} sx={{ ml: 2, fontFamily: "Inter" }}>
             {audioMuted ? (
-              <VolumeOffIcon sx={{ color: "white" }} />
+              <VolumeOffIcon sx={{ color: "white", fontFamily: "Inter" }} />
             ) : (
-              <VolumeUpIcon sx={{ color: "white" }} />
+              <VolumeUpIcon sx={{ color: "white", fontFamily: "Inter" }} />
             )}
           </IconButton>
         </Box>

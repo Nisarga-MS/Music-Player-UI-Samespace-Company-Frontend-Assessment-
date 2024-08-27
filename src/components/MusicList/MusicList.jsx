@@ -24,7 +24,7 @@ const MusicList = ({
   };
 
   const handleChange = (event) => {
-    setSearchInput(event.traget.value);
+    setSearchInput(event.target.value);
   };
 
   useEffect(() => {
@@ -53,19 +53,35 @@ const MusicList = ({
       <Grid
         container
         justifyContent="flex-start"
-        sx={{ marginBottom: 2, marginTop: 4, padding: "3px" }}
+        sx={{
+          marginBottom: 2,
+          marginTop: 3,
+          padding: "3px",
+          fontFamily: "Inter",
+        }}
       >
         {/* Tab change between For You to Top Track */}
         {stage === 0 ? (
           <Typography
-            sx={{ marginRight: 4, color: "white", cursor: "pointer" }}
+            sx={{
+              marginRight: 4,
+              color: "white",
+              cursor: "pointer",
+              fontFamily: "Inter",
+              fontWeight: 700,
+            }}
             onClick={() => setStage(0)}
           >
             For You
           </Typography>
         ) : (
           <Typography
-            sx={{ marginRight: 4, color: "gray", cursor: "pointer" }}
+            sx={{
+              marginRight: 4,
+              color: "gray",
+              cursor: "pointer",
+              fontFamily: "Inter",
+            }}
             onClick={() => setStage(0)}
           >
             For You
@@ -73,24 +89,30 @@ const MusicList = ({
         )}
         {stage === 1 ? (
           <Typography
-            sx={{ color: "white", cursor: "pointer" }}
+            sx={{
+              color: "white",
+              cursor: "pointer",
+              fontFamily: "Inter",
+              fontWeight: 700,
+            }}
             onClick={() => setStage(1)}
           >
             Top Track
           </Typography>
         ) : (
           <Typography
-            sx={{ color: "gray", cursor: "pointer" }}
+            sx={{ color: "gray", cursor: "pointer", fontFamily: "Inter" }}
             onClick={() => setStage(1)}
           >
             Top Tracks
           </Typography>
         )}
       </Grid>
-      {/* search bar */}
+      {/* search bar (input filed for search)*/}
       <Input
         sx={{
-          width: "88%",
+          fontFamily: "Inter",
+          width: "85%",
           background: lighten(0.2, color),
           padding: "4px",
           borderRadius: "7px",
@@ -113,7 +135,7 @@ const MusicList = ({
         }
       />
       <Grid>
-        {/* for you display */}
+        {/* "for you" section music display */}
         {stage === 0
           ? allData.map((track) => (
               <Grid
@@ -132,6 +154,7 @@ const MusicList = ({
                     transition: "background-color 0.5s ease",
                     width: "100%",
                     overflow: "hidden",
+                    fontFamily: "Inter",
                   },
                 }}
               >
@@ -146,6 +169,7 @@ const MusicList = ({
                           height: "45px",
                           marginLeft: "2px",
                           marginRight: "10px",
+                          fontFamily: "Inter",
                         }}
                       />
                     </Box>
@@ -153,16 +177,32 @@ const MusicList = ({
                   <Grid item sx={{ width: "70%" }}>
                     <Grid container flex justifyContent="space-between">
                       <Grid item flex justifyContent="flex-start">
-                        <Typography sx={{ color: "white" }}>
+                        <Typography
+                          sx={{ color: "white", fontFamily: "Inter" }}
+                        >
                           {track.name}
                         </Typography>
-                        <Typography sx={{ color: "gray" }}>
+                        <Typography
+                          sx={{
+                            color: "gray",
+                            fontFamily: "Inter",
+                            fontSize: "13px",
+                          }}
+                        >
+                          {" "}
                           {track.artist}
                         </Typography>
                       </Grid>
                       <Grid item>
-                        <Typography sx={{ color: "gray", marginTop: "22px" }}>
-                          {track.duraction}
+                        <Typography
+                          sx={{
+                            color: "gray",
+                            marginTop: "22px",
+                            fontFamily: "Inter",
+                          }}
+                        >
+                          {" "}
+                          {track.duration}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -170,7 +210,7 @@ const MusicList = ({
                 </Grid>
               </Grid>
             ))
-          : // Top Track Display
+          : // "Top Track"  section music Display
             topData.map((track) => (
               <Grid
                 item
@@ -180,6 +220,7 @@ const MusicList = ({
                 xs={12}
                 onClick={() => handleTrackClick(track)}
                 sx={{
+                  fontFamily: "Inter",
                   height: "70px",
                   cursor: "pointer",
                   "&: hover": {
@@ -198,6 +239,7 @@ const MusicList = ({
                           width: "45px",
                           height: "45px",
                           marginRight: "10px",
+                          fontFamily: "Inter",
                         }}
                       />
                     </Box>
@@ -205,16 +247,26 @@ const MusicList = ({
                   <Grid item sx={{ width: "70%" }}>
                     <Grid container flex justifyContent="space-between">
                       <Grid item flex justifyContent="flex-start">
-                        <Typography sx={{ color: "white" }}>
+                        <Typography
+                          sx={{ color: "white", fontFamily: "Inter" }}
+                        >
                           {track.name}
                         </Typography>
-                        <Typography sx={{ color: "gray" }}>
+                        <Typography
+                          sx={{
+                            color: "gray",
+                            fontFamily: "Inter",
+                            fontSize: "13px",
+                          }}
+                        >
+                          {" "}
                           {track.artist}
                         </Typography>
                       </Grid>
                       <Grid item>
-                        <Typography sx={{ color: "gray" }}>
-                          {track.duraction}
+                        <Typography sx={{ color: "gray", fontFamily: "Inter" }}>
+                          {" "}
+                          {track.duration}
                         </Typography>
                       </Grid>
                     </Grid>

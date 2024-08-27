@@ -1,14 +1,14 @@
 // source of music
 export const MUSIC_API = "https://cms.samespace.com/items/songs";
 
-// time calculation
+//  arrow function for time calculation
 const musicFormatDuration = (seconds) => {
   const minutes = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
 };
 
-//duration handler
+// audio duration handler
 export async function musicDurationHandler(data) {
   const promises = data.map(async (item) => {
     try {

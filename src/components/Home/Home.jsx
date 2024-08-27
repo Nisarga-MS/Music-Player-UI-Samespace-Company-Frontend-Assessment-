@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { MUSIC_API } from "../MusicUtils/MusicUtils";
 import { musicDurationHandler } from "../MusicUtils/MusicUtils";
+import Profile from "../../assets/Profile.png";
 import SideMenu from "../SideMenu/SideMenu";
 import MusicList from "../MusicList/MusicList";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Grid, IconButton, Drawer, Box, useMediaQuery } from "@mui/material";
+import {
+  Grid,
+  IconButton,
+  Drawer,
+  Box,
+  useMediaQuery,
+  Avatar,
+} from "@mui/material";
 
 const Home = () => {
-  const isSmallScreen = useMediaQuery("max-width:960px");
+  const isSmallScreen = useMediaQuery("(max-width:960px)");
+  //states
   const [music, setMusic] = useState(1);
   const [color, setColor] = useState("#331A05");
   const [data, setData] = useState([]);
@@ -76,16 +85,19 @@ const Home = () => {
       justifyContent="space-between"
       spacing={2}
       sx={{
+        margin: 0,
         backgroundColor: color,
         transition: "background-color 1s ease",
-        margin: 0,
+        fontFamily: "Inter",
       }}
     >
+      {/* app logo & profile pick left most part (sidemenu at lagre screen) */}
       {!isSmallScreen && (
-        <Grid item md={3} marginTop={"-20px"}>
+        <Grid item md={3} marginTop="-20px">
           <SideMenu />
         </Grid>
       )}
+
       {!isSmallScreen && (
         <Grid
           item
@@ -93,6 +105,7 @@ const Home = () => {
           sx={{
             backgroundColor: color,
             transition: "background-color 1s ease",
+            fontFamily: "Inter",
           }}
         >
           {/* list of music displayed */}
@@ -119,14 +132,37 @@ const Home = () => {
           backgroundColor={color}
         />
       </Grid>
+      {/* display at small screen device */}
       {isSmallScreen && (
         <>
-          <IconButton
-            onClick={() => setDrawerOpen(true)}
-            sx={{ position: "fixed", top: 10, left: 10, zIndex: 1200 }}
-          >
-            <MenuIcon sx={{ color: "white" }} />
-          </IconButton>
+          <Grid>
+            <IconButton
+              onClick={() => setDrawerOpen(true)}
+              sx={{
+                position: "fixed",
+                top: 10,
+                left: 10,
+                zIndex: 1200,
+                fontFamily: "Inter",
+              }}
+            >
+              <MenuIcon sx={{ color: "white" }} />
+            </IconButton>
+            <Avatar
+              src={Profile}
+              alt="Profile Pick"
+              sx={{
+                width: "38px",
+                height: "38px",
+                position: "fixed",
+                top: 13,
+                right: 28,
+                zIndex: 1200,
+                fontFamily: "Inter",
+              }}
+            />
+          </Grid>
+          {/* for smallscreen device drawer sidebar */}
           <Drawer
             anchor="left"
             open={drawerOpen}
@@ -135,10 +171,11 @@ const Home = () => {
             <Box
               sx={{
                 width: 250,
+                height: "120%",
+                padding: "3px",
                 backgroundColor: color,
                 transition: "background-color 1s ease",
-                height: "100%",
-                padding: "3px",
+                fontFamily: "Inter",
               }}
             >
               <MusicList
