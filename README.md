@@ -1,6 +1,6 @@
 # MUSIC PLAYER-UI (Samespace Company Assignment)
 
-Github Repository Link : https://github.com/Nisarga-MS/Music-Player-UI-Samespace-Company-Frontend-Assessment-
+GitHub Repository Link : https://github.com/Nisarga-MS/Music-Player-UI-Samespace-Company-Frontend-Assessment-
 
 vercel Deployment Link : https://music-player-ui-samespace-company-frontend-assessment.vercel.app/
 
